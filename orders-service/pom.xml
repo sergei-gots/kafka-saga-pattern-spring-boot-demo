@@ -36,7 +36,6 @@
         <dependency>
             <groupId>org.appsdeveloperblog.saga</groupId>
             <artifactId>core</artifactId>
-            <version>${revision}</version>
         </dependency>
 
         <dependency>

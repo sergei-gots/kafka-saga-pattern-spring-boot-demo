@@ -41,6 +41,11 @@
                 <version>${springframework.version}</version>
             </dependency>
             <dependency>
+                <groupId>org.appsdeveloperblog.saga</groupId>
+                <artifactId>core</artifactId>
+                <version>${revision}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.testcontainers</groupId>
                 <artifactId>junit-jupiter</artifactId>
                 <version>${testcontainers.version}</version>
