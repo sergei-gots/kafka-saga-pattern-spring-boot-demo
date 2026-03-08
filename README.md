@@ -12,3 +12,14 @@ The easiest and recommended way is to run this command **from the root of the pr
 cd core
 mvn clean install
 cd ..
+```
+
+## API Documentation (Swagger UI)
+
+The `orders-service` module exposes a REST API with interactive documentation via Swagger UI.
+
+After starting the application, open your browser and go to:
+
+**http://localhost:8080/swagger-ui/index.html**
+
+(or http://localhost:8080/swagger-ui.html)
