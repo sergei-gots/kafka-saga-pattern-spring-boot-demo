@@ -5,7 +5,8 @@ Demonstration of SAGA Orchestration Design Pattern using Java 17 / Spring Boot 3
 ## Quick Start
 
 ### 'core' module
-Before running the project, you may need to build the `core` module first (it contains shared code and is used by other modules).
+Before running the project and each time you made changes in the `core` module, 
+you may need to build the `core` module first (it contains shared code and is used by other modules).
 
 The easiest and recommended way is to run this command **from the root of the project**:
 
