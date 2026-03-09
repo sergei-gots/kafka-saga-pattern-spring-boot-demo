@@ -3,6 +3,7 @@ package org.appsdeveloperblog.saga.products.service.handler;
 import lombok.extern.slf4j.Slf4j;
 import org.appsdeveloperblog.saga.core.dto.Product;
 import org.appsdeveloperblog.saga.core.dto.commands.ReserveProductCommand;
+import org.appsdeveloperblog.saga.core.dto.events.ProductReservationFailedEvent;
 import org.appsdeveloperblog.saga.core.dto.events.ProductReservedEvent;
 import org.appsdeveloperblog.saga.core.exceptions.ProductInsufficientQuantityException;
 import org.appsdeveloperblog.saga.products.service.ProductService;
@@ -49,6 +50,7 @@ public class ReserveProductCommandHandler {
         }
         catch (ProductInsufficientQuantityException e) {
             log.error(e.getLocalizedMessage());
+            sendProductReservationFailedEvent(reserveProductCommand);
         }
 
     }
@@ -62,5 +64,15 @@ public class ReserveProductCommandHandler {
                 product.getQuantity()
         );
         kafkaTemplate.send(productReservedEventsTopicName, productReservedEvent);
+    }
+
+    private void sendProductReservationFailedEvent(ReserveProductCommand reserveProductCommand) {
+
+        ProductReservationFailedEvent productReservationFailedEvent = new ProductReservationFailedEvent(
+                reserveProductCommand.getProductId(),
+                reserveProductCommand.getOrderId(),
+                reserveProductCommand.getProductQuantity()
+        );
+        kafkaTemplate.send(productReservedEventsTopicName, productReservationFailedEvent);
     }
 }

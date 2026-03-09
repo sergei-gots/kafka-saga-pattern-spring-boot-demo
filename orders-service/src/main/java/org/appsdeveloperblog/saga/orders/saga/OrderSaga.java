@@ -1,5 +1,6 @@
 package org.appsdeveloperblog.saga.orders.saga;
 
+import lombok.extern.slf4j.Slf4j;
 import org.appsdeveloperblog.saga.core.dto.commands.ReserveProductCommand;
 import org.appsdeveloperblog.saga.core.dto.events.OrderCreatedEvent;
 import org.appsdeveloperblog.saga.core.types.OrderStatus;
@@ -11,6 +12,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 @KafkaListener(topics = "${order.events.topic.name}")
 public class OrderSaga {
@@ -28,8 +30,15 @@ public class OrderSaga {
         this.orderHistoryService = orderHistoryService;
     }
 
+    @KafkaHandler(isDefault = true)
+    public void unknownEvent(@Payload Object unknown) {
+        log.warn("Unknown payload received from order-events topic: {}", unknown.getClass().getName());
+    }
+
     @KafkaHandler
     public void handleOrderCreatedEvent(@Payload OrderCreatedEvent orderCreatedEvent) {
+
+        log.info("Received OrderCreatedEvent={}", orderCreatedEvent);
 
         ReserveProductCommand reserveProductCommand = ReserveProductCommand.builder()
                 .orderId(orderCreatedEvent.getOrderId())
