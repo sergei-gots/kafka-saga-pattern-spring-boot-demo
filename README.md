@@ -4,7 +4,8 @@ Demonstration of SAGA Orchestration Design Pattern using Java 17 / Spring Boot 3
 
 ## Quick Start
 
-Before running the project, you need to build the `core` module first (it contains shared code and is used by other modules).
+### 'core' module
+Before running the project, you may need to build the `core` module first (it contains shared code and is used by other modules).
 
 The easiest and recommended way is to run this command **from the root of the project**:
 
@@ -13,6 +14,17 @@ cd core
 mvn clean install
 cd ..
 ```
+
+### IDE Setup (IntelliJ IDEA)
+
+For seamless development with Lombok in this multi-module project:
+
+- Open **Settings** (Ctrl+Alt+S)
+- Navigate to **Build, Execution, Deployment → Build Tools → Maven → Runner**
+- Enable **Delegate IDE build/run actions to Maven**
+
+This ensures Maven handles compilation (including Lombok annotation processing) even when launching applications directly from the IDE.
+
 
 ## API Documentation (Swagger UI)
 
