@@ -16,10 +16,18 @@ cd ..
 
 ## API Documentation (Swagger UI)
 
-The `orders-service` module exposes a REST API with interactive documentation via Swagger UI.
+This project contains multiple microservices with REST APIs, each equipped with interactive OpenAPI/Swagger documentation powered by **springdoc-openapi**.
 
-After starting the application, open your browser and go to:
+After starting the corresponding service, you can access the Swagger UI in your browser:
 
-**http://localhost:8080/swagger-ui/index.html**
+| Service            | Default Port | Swagger UI URL                                      |
+|--------------------|--------------|-----------------------------------------------------|
+| orders-service     | 8080         | http://localhost:8080/swagger-ui/index.html         |
+| products-service   | 8081         | http://localhost:8081/swagger-ui/index.html         |
 
-(or http://localhost:8080/swagger-ui.html)
+Alternative URLs (both usually work):
+- `http://localhost:<port>/swagger-ui.html`
+- `http://localhost:<port>/swagger-ui/index.html`
+
+You can also access the raw OpenAPI JSON specification at:
+- `http://localhost:<port>/v3/api-docs`
