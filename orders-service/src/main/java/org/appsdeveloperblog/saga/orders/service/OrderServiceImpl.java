@@ -38,7 +38,7 @@ public class OrderServiceImpl implements OrderService {
         placedOrderEvent.setOrderId(savedEntity.getId());
         placedOrderEvent.setProductId(savedEntity.getProductId());
         placedOrderEvent.setCustomerId(savedEntity.getCustomerId());
-        placedOrderEvent.setProductQuantity(placedOrderEvent.getProductQuantity());
+        placedOrderEvent.setProductQuantity(savedEntity.getProductQuantity());
 
         kafkaTemplate.send(orderEventsTopicName, placedOrderEvent);
 
