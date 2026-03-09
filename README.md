@@ -17,7 +17,7 @@ cd ..
 
 ### IDE Setup (IntelliJ IDEA)
 
-For seamless development with Lombok in this multi-module project:
+For seamless development with Lombok you can apply the following setting in this multi-module project:
 
 - Open **Settings** (Ctrl+Alt+S)
 - Navigate to **Build, Execution, Deployment → Build Tools → Maven → Runner**
