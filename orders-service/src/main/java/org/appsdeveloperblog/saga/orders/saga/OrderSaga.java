@@ -2,6 +2,8 @@ package org.appsdeveloperblog.saga.orders.saga;
 
 import org.appsdeveloperblog.saga.core.dto.commands.ReserveProductCommand;
 import org.appsdeveloperblog.saga.core.dto.events.OrderCreatedEvent;
+import org.appsdeveloperblog.saga.core.types.OrderStatus;
+import org.appsdeveloperblog.saga.orders.service.OrderHistoryService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaHandler;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -16,11 +18,14 @@ public class OrderSaga {
     private final KafkaTemplate<String, Object> kafkaTemplate;
     private final String productCommandsTopicName;
 
+    private final OrderHistoryService orderHistoryService;
+
     public OrderSaga(
             KafkaTemplate<String, Object> kafkaTemplate,
-            @Value("${product.commands.topic.name}") String productCommandsTopicName) {
+            @Value("${product.commands.topic.name}") String productCommandsTopicName, OrderHistoryService orderHistoryService) {
         this.kafkaTemplate = kafkaTemplate;
         this.productCommandsTopicName = productCommandsTopicName;
+        this.orderHistoryService = orderHistoryService;
     }
 
     @KafkaHandler
@@ -33,6 +38,6 @@ public class OrderSaga {
         .build();
 
         kafkaTemplate.send(productCommandsTopicName, reserveProductCommand);
-
+        orderHistoryService.add(orderCreatedEvent.getOrderId(), OrderStatus.CREATED);
     }
 }
