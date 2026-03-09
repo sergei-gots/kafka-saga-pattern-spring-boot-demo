@@ -32,7 +32,7 @@ public class OrderSaga {
     public void handleOrderCreatedEvent(@Payload OrderCreatedEvent orderCreatedEvent) {
 
         ReserveProductCommand reserveProductCommand = ReserveProductCommand.builder()
-                .orderId(orderCreatedEvent.getCustomerId())
+                .orderId(orderCreatedEvent.getOrderId())
                 .productId(orderCreatedEvent.getProductId())
                 .productQuantity(orderCreatedEvent.getProductQuantity())
         .build();
